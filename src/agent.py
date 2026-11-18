@@ -95,7 +95,7 @@ def new_chat(role: str):
     client = genai.Client(api_key=key)
 
     chat = client.chats.create(
-        model='gemini-2.5-flash',
+        model='gemini-3.8-flash',
         config=types.GenerateContentConfig(
             system_instruction=INSTRUCTION + f'\nBrukerens rolle: {role}.',
             tools=[predict_price],
