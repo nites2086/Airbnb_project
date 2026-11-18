@@ -83,12 +83,18 @@ IMPORTANT LIMITATIONS:
 
 
 
+
 def new_chat(role: str):
     key = os.getenv('GEMINI_API_KEY')
+
     if not key:
-        raise RuntimeError('GEMINI_API_KEY mangler. Sett den i terminalen før du starter.')
+        raise RuntimeError(
+            'GEMINI_API_KEY mangler. Legg den inn i Streamlit Secrets.'
+        )
+
     client = genai.Client(api_key=key)
-    return client.chats.create(
+
+    chat = client.chats.create(
         model='gemini-3-flash-preview',
         config=types.GenerateContentConfig(
             system_instruction=INSTRUCTION + f'\nBrukerens rolle: {role}.',
@@ -96,3 +102,7 @@ def new_chat(role: str):
             temperature=0.2,
         ),
     )
+
+    return client, chat
+
+
