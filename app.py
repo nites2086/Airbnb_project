@@ -27,7 +27,7 @@ if prompt := st.chat_input('Beskriv boligen eller spør om en pris...'):
     with st.chat_message('assistant'):
         try:
             if 'gemini_chat' not in st.session_state:
-                st.session_state.gemini_chat = new_chat(role)
+                st.session_state.gemini_client, st.session_state.gemini_chat = new_chat(role)
             response = st.session_state.gemini_chat.send_message(prompt)
             answer = response.text or 'Jeg fikk ikke et tekstsvar. Prøv å formulere spørsmålet på nytt.'
             st.write(answer)
